@@ -12,8 +12,11 @@ module.exports = {
             exclude : /node_moudles/,
             query :{
                 presets :['es2015','react']
-            }    
-        }
+            }   
+        },
+        {
+                test:/\.css$/,
+            } 
 
         ]
     }
