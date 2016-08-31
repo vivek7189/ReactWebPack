@@ -181,7 +181,7 @@ function traverseDom(node){
           }
      }
 }
-traverseDom(elem);
+//traverseDom(elem);
 console.log(attrib);
 function isPrime(number) {
    // If your browser doesn't support the method Number.isInteger of ECMAScript 6,
@@ -216,4 +216,97 @@ function isPrime(number) {
 function getElementsByAttribute(name){
 
 }
-getElementsByAttribute(va);
+//getElementsByAttribute(va);
+//remove all children from an element
+var element4 = document.getElementById('top');
+var inner = document.getElementById('inner');
+//while(element4.firstChild){
+  //element4.removeChild(element4.firstChild);
+//}
+
+// remove a node without specifying the element parent nodevar 
+var nodeToDel=document.getElementById('nested');
+//var tt=nodeToDel.parentNode.removeChild(nodeToDel);
+////console.log('tt',tt);
+//tt.insertBefore(element4);
+//element4.insertBefore(tt,null);
+
+// longest common substring
+var str1="abcdf";
+var str2="dabc";
+var tt={};
+function longestStr(a,b){
+    for(var i=0;i<a.length;i++){
+            for(var j=0;j<b.length;j++){
+               // console.log("a",i,"b",j);
+                if(a[i] === b[j]){
+                    console.log(i,j);
+                }
+                else{
+                    console.log('no match');
+                }
+            }
+    }
+}
+longestStr(str1,str2);
+
+// linked list in javacript
+var node ={data:'',next:''}
+function Node(data){
+    this.data=data
+    this.next=null;
+}
+function LinkedList (){
+            this.head=null;
+}
+
+LinkedList.prototype.add= function (data){
+    var node = new Node(data);
+    if(this.head === null){
+            this.head=node;
+    }else{
+        var temp=this.head;
+        while(temp.next){
+                temp=temp.next
+        }
+        temp.next=node;
+    }
+}
+LinkedList.prototype.reverse = function(){
+    if(this.head == null){
+        console.log('only one item is there in linkedt list');
+        return;
+    }else{
+        var root= this.head;
+        var current= this.head;
+        var previous;
+        var next;
+        while(current !== null){
+                next=current.next;
+                current.next=previous;
+                previous=current;
+                current=next;
+        }
+        root=previous;
+        console.log('rev',root);
+    }
+}
+var list = new LinkedList();
+list.add('vivek');
+list.add('kapil');
+list.add('kapil3');
+list.reverse();
+//console.log('list',list);
+
+
+function isChild(node){
+
+  while(node.parentNode !== null){
+        if(node.parentNode === element4){
+            console.log('yes child');
+        }
+        node =node.parentNode
+  }
+}
+
+isChild(nodeToDel);
