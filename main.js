@@ -291,12 +291,56 @@ LinkedList.prototype.reverse = function(){
         console.log('rev',root);
     }
 }
+
+LinkedList.prototype.remove= function(data){
+   if(this.head === null || this.head.next === null){
+       console.log('linked list is empty');
+   }
+   else{
+       var temp=this.head;
+       var previous;
+       var next;
+       while(temp.data !== data){
+            previous=temp;
+            temp=temp.next;
+       }
+       var nodeTodel =temp;
+        next =temp.next;
+        console.log('previous',previous);
+        console.log('nodeTodel',nodeTodel);
+        console.log('next',next);
+        previous.next=next;
+
+        console.log('final lis',list);
+        
+
+   }
+}
+LinkedList.prototype.reverse2= function(){
+    var temp=this.head;
+    var current=this.head;
+    var next;
+    var pre=null;
+   while(current.next !== null){ 
+    next =current.next;
+    current.next=pre;
+    pre=current;
+    current=next;
+   }
+   temp=pre;
+   console.log('list reverse2',temp,next,pre);
+}
 var list = new LinkedList();
 list.add('vivek');
 list.add('kapil');
+list.add('kapil1');
+list.add('kapil2');
 list.add('kapil3');
-list.reverse();
-//console.log('list',list);
+
+//list.remove('kapil1');
+//list.reverse();
+list.reverse2();
+console.log('list',list);
 
 
 function isChild(node){
@@ -310,3 +354,152 @@ function isChild(node){
 }
 
 isChild(nodeToDel);
+
+
+// function merge sort
+var array6=[7,1,6,3,4];
+function mergeSort(arr){
+    var arrLen=arr.length;
+    var mid=Math.floor(arrLen/2);
+    var left=arr.slice(0,mid)
+    var right=arr.slice(mid);
+    if(arrLen === 1){
+        console.log('return',arr);
+        return arr;
+    }else{
+        left= mergeSort(left);
+        right =mergeSort(right);
+        console.log('left',left);
+        console.log('right',right);
+        return merge(left,right);
+    }
+}
+
+function merge(left, right){
+    console.log('merge Left',left,"merge right",right);
+    var result=[];
+    var leftIndex=0;
+    var rightIndex=0;
+  
+    while(leftIndex<left.length && rightIndex<right.length){
+        if(left[leftIndex]>right[rightIndex])
+        {
+  
+            result.push(right[rightIndex]);
+            rightIndex++;
+        }
+        else
+        {
+            result.push(left[leftIndex]);
+            leftIndex++;
+        }
+    }
+    while(leftIndex<left.length)
+    {
+        result.push(left[leftIndex]);
+        leftIndex++;
+    }
+    while(rightIndex<right.length)
+    {
+        result.push(right[rightIndex]);
+        rightIndex++;
+    }
+    console.log('result',result);
+    return result;
+}
+
+console.log(mergeSort(array6));
+
+
+// get the sum of data from array
+var array7=[99,4,97,6,4,3];
+function findSumInArray(arr,sum){
+    var arrLen=arr.length;
+    var tempArr=[];
+    for(var i=0;i<arrLen;i++){
+            tempArr[i]=sum-arr[i];
+            if(tempArr.indexOf(arr[i]) > -1){
+                console.log('got it at posiotn');
+            }
+
+            for(var j=0;j<arrLen;j++){
+                
+            }
+    }
+    console.log('array7',tempArr);
+}
+findSumInArray(array7,100);
+
+
+
+
+function Trie(parent, prev, key, value) {
+    if (key !== void 0)
+        this.key = key;      // single-character key
+    if (value !== void 0)
+        this.value = value;  // user-defined value
+    if (prev)
+        prev.next = this;    // next sibling node
+    else if (parent)
+        parent.child = this; // first child node
+}
+
+// put a key/value pair in the trie
+Trie.prototype.put = function(name, value) {
+    var i = 0, t = this, len = name.length, prev, parent;
+    down: while (t.child) {
+        parent = t;
+        t = t.child;
+        // if first child didn't match, get next sibling
+        while (t.key != name[i]) {
+            if (!t.next) {
+                prev = t;
+                t = parent;
+                break down;
+            }
+            t = t.next;
+        }
+        // key already exists, update the value
+        if (++i > len) {
+            t.value = value;
+            return;
+        }
+    }
+    // found any existing parts of the key, add the rest
+    t = new this.constructor(t, prev, name[i]);
+    while (++i <= len)
+        t = new this.constructor(t, null, name[i]);
+    t.name = name;
+    t.value = value;
+};
+
+// get a value from the trie at the given key
+Trie.prototype.get = function(name) {
+    var i = 0, t = this.child, len = name.length;
+    while (t) {
+        if (t.key == name[i]) {
+            if (i == len)
+                return t.value;
+            t = t.child;
+            ++i;
+        } else {
+            t = t.next;
+        }
+    }
+};
+
+// --------
+
+var dict = new Trie();
+
+dict.put("true", "yes");
+
+
+console.log("true:", dict.get("true"));
+
+console.log(dict);
+
+
+
+
+
