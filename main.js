@@ -248,7 +248,7 @@ function longestStr(a,b){
             }
     }
 }
-longestStr(str1,str2);
+//longestStr(str1,str2);
 
 // linked list in javacript
 var node ={data:'',next:''}
@@ -339,8 +339,8 @@ list.add('kapil3');
 
 //list.remove('kapil1');
 //list.reverse();
-list.reverse2();
-console.log('list',list);
+//list.reverse2();
+//console.log('list',list);
 
 
 function isChild(node){
@@ -408,7 +408,7 @@ function merge(left, right){
     return result;
 }
 
-console.log(mergeSort(array6));
+//console.log(mergeSort(array6));
 
 
 // get the sum of data from array
@@ -423,12 +423,12 @@ function findSumInArray(arr,sum){
             }
 
             for(var j=0;j<arrLen;j++){
-                
+
             }
     }
     console.log('array7',tempArr);
 }
-findSumInArray(array7,100);
+//findSumInArray(array7,100);
 
 
 
@@ -491,8 +491,9 @@ Trie.prototype.get = function(name) {
 // --------
 
 var dict = new Trie();
-
+dict.put("abob", "Bob");
 dict.put("true", "yes");
+dict.put("bob", "Bob");
 
 
 console.log("true:", dict.get("true"));
@@ -501,5 +502,73 @@ console.log(dict);
 
 
 
+// rotate the matrix by 90 degree clockwise
+var array10=[[1,2,3,25],[4,5,6,26],[7,8,9,27],[10,11,12,28]];
+function rotateMatrix(arr){
+    var arrLen= arr.length;
+    var N=4;
+  /*for(var x=0;x<N/2;x++){
+       for(var y=x;y<N-x-1;y++){
+            var temp = arr[x][y];
+ 
+            // move values from right to top
+            arr[x][y] = arr[y][N-1-x];
+ 
+            // move values from bottom to right
+            arr[y][N-1-x] = arr[N-1-x][N-1-y];
+ 
+            // move values from left to bottom
+            arr[N-1-x][N-1-y] = arr[N-1-y][x];
+ 
+            // assign temp to left
+            arr[N-1-y][x] = temp;
+       }
+  }*/
+
+  for(let i=0;i<N;i++){
+       for(let j=i;j<N;j++){
+                var temp=arr[i][j];
+                arr[i][j]=arr[j][i];
+                arr[j][i]=temp;
+       }
+  }
+ 
+  
+  console.table(arr);
+  for(let k=0;k<N;k++){
+       for(let l=0;l<N/2;l++){
+            var temp=arr[k][l];
+            arr[k][l]=arr[k][N-1-l];
+            arr[k][N-1-l]=temp;
+       }
+  }
+ 
+  console.table(arr);
+}
+//console.table(array10);
+//rotateMatrix(array10);
 
 
+
+// traverse a dom in depth first manner
+var domNode= document.getElementById('traverse');
+function domDFS(node){
+   var data=node;
+   console.log(data);
+
+preOder(data);
+
+}
+
+function preOder(node){
+  if(node && node.childElementCount === null){
+        return;
+  }
+  console.log(node);
+  if(node){
+   preOder(node.firstElementChild);
+   preOder(node.lastElementChild);
+  }
+ 
+}
+preOder(domNode);
