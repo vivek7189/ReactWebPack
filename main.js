@@ -61,10 +61,10 @@ function pushToRight(array){
             zeroPointStart++;
         }
     }
-     console.log("array",arr,countZero);
+    // console.log("array",arr,countZero);
 }
 
-pushToRight(array);
+//pushToRight(array);
 
 // array with 0 and 1 partition
 
@@ -88,9 +88,9 @@ function partionArray(arr){
         }
 
     }
-    console.log('partionArray',arr);
+    //console.log('partionArray',arr);
 }
-partionArray(array2);
+//partionArray(array2);
 
 // clouser add to button
 function callIt(i){
@@ -139,7 +139,7 @@ function longestSubStr(a,b){
          }
 
    }
-   console.log("arr",arr);
+  // console.log("arr",arr);
 }
 //longestSubStr(str1,str2);
 function getAllText(node){
@@ -156,7 +156,7 @@ function getAllText(node){
      }
   }
   getNodeText(node);
-   console.log(allText.join(''));
+  // console.log(allText.join(''));
 }
 
 var elem = document.body;
@@ -182,7 +182,7 @@ function traverseDom(node){
      }
 }
 //traverseDom(elem);
-console.log(attrib);
+//console.log(attrib);
 function isPrime(number) {
    // If your browser doesn't support the method Number.isInteger of ECMAScript 6,
    // you can implement your own pretty easily
@@ -234,7 +234,6 @@ var nodeToDel=document.getElementById('nested');
 // longest common substring
 var str1="abcdf";
 var str2="dabc";
-var tt={};
 function longestStr(a,b){
     for(var i=0;i<a.length;i++){
             for(var j=0;j<b.length;j++){
@@ -572,3 +571,766 @@ function preOder(node){
  
 }
 preOder(domNode);
+
+
+// insertion sort
+function swap(first,second){
+  var temp =second;
+  second=first;
+  first=temp;
+}
+var array12=[10,0,23,12,2,9];
+function insertionSort(arr){
+   for(var i=0;i<arr.length;i++){
+        var temp=arr[i+1];
+      for(var j=0;j<=i;j++){
+            if(temp<arr[j] ){
+                   var ds=arr[i+1];
+                   arr[i+1]=arr[j];
+                   arr[j]=ds; 
+            }
+      }
+   }
+   console.log('insertionSort',arr);
+}
+//insertionSort(array12);
+
+
+
+
+// selection sort
+
+function selectionSort(arr){
+     for(var i=0;i<arr.length;i++){
+         var first=i;
+         var minm =i+1;
+      for(var j=i+1;j<arr.length;j++){
+         if(arr[minm] > arr[j+1]){
+                 minm=j+1;
+         }
+        
+      }
+       if(arr[first] >arr[minm] ){
+                   var ds=arr[minm];
+                   arr[minm]=arr[first];
+                   arr[first]=ds; 
+            }
+       
+   }
+    console.log('selectionSort',arr,minm);
+
+}
+//selectionSort(array12);
+
+
+
+// quick sort 
+
+var array13=[10,2,9,5,44,3,6,7];
+function quickSort(arr,left,right){
+  
+    var i= left;
+    var j=right;
+    var pivot= Math.floor((left+right)/2);
+    console.log("pivot",arr[pivot],pivot);
+    while(i <=j){
+          while(arr[i] < arr[pivot]){
+                   i++;
+          }
+        while(arr[j] > arr[pivot]){
+                  j--;
+          }
+          if(i <=j){
+              var temp=arr[i];
+              arr[i]=arr[j];
+              arr[j]=temp;
+              i++;
+              j--;
+          }
+    }
+    if(j>left){
+        quickSort(arr,left,j)
+    }
+    if(i<right){
+       quickSort(arr,i,right)
+    }
+console.log("quicksort",arr);
+}
+var quicklength =array13.length-1;
+quickSort(array13,0,quicklength);
+
+
+
+
+
+// linkedlist implementation in javascript
+function Linkedlist(){
+   this.root =null;
+   this.length=0;
+}
+function Node(value){
+    this.value= value;
+    this.next = null;
+}
+
+Linkedlist.prototype = {
+    constructor : Linkedlist,
+    add : function (n){
+        var node = new Node(n); 
+        if(this.root == null){
+            this.root =node;
+        }else {
+            var temp = this.root;
+            while(temp.next){
+                     temp = temp.next;
+            }
+            temp.next = node;     
+        }
+         this.length++;
+    },
+
+    remove : function(value){
+             if(this.root.value == value){
+                    this.root= this.root.next;
+                    this.length--;
+             }else{
+                 var current=this.root;
+                 var previous;
+                 while(current.value != value){
+                        previous=current;
+                        current = current.next;
+                        var temp=current;
+                        console.log(current);
+                        count++;
+                 }
+                 previous.next=current.next
+                // current = current.next;
+                
+                // delete node.value;
+                 this.length--;
+             }
+    },
+
+    find : function (value){
+        if(this.root == value){
+                return true;
+        }else {
+            var node = this.root;
+            var count=0;
+           
+            while(node && node.value !== value){
+                    node = node.next;
+                    console.log('node',node);
+                    console.log(++count,node);
+                   if(this.length === count){
+                        console.log("not found");
+                        break;
+                    }
+            }
+            
+            return node;
+            
+        }
+    },
+    reverse : function(){
+        var root =this.root,
+            current,prev,next;
+                current=this.root;
+                while(current !== null){
+                    next = current.next;
+                    current.next = prev;
+                    prev = current;
+                    current = next;
+                }
+                root=prev;
+                console.log("prev prev : ",root);
+
+    }
+}
+
+var ls= new Linkedlist();
+ls.add(8);
+ls.add(9);
+ls.add(91);
+ls.add(41);
+
+
+ls.reverse();
+
+console.log(ls);
+
+
+
+
+
+// callback functions in javascripts
+
+function makeIt(name,last,callback){
+   console.log("name",name);
+   var fnname="nameit"
+   callback(name,last,fnname);
+}
+
+function callbackFn(last,namec,fnname){
+  console.log("fgffhgfhfh fnname",last,namec,fnname);
+}
+
+
+function parents(){
+
+    var namec="vivek342";
+    var tt = function (){
+        console.log('namec',namec);
+        makeIt("viv",namec,callbackFn);
+   }
+   return tt;
+}
+
+var ff= parents();
+console.log(ff());
+
+
+
+
+// 
+var calObj={a:4,b:6}
+var cal ={
+    text:"vivek",
+    add : function (a,b){
+    return this.a+this.b;
+    },
+    sub : function (a,b){
+        return a-b;
+    },
+    format : function (){
+            var th = this
+        return function upper(){
+                       // use this variable in outer function to get a refrence of this inside inner fn
+                    var txt = th.text.toUpperCase();
+                    return txt +"text";
+        }
+        //upper(th.text);
+    }
+}
+console.log(cal.format("ram")());
+console.log(cal.add.call(calObj,4,8));
+
+
+
+
+
+
+
+// implement a 
+
+
+var ls2= new Linkedlist();
+ls2.add(25);
+ls2.add(26);
+ls2.add(27);
+ls2.add(28);
+ls2.add(29);
+ls2.add(30);
+
+//ls2.root.next.next.next.next.next.next = ls2.root;
+
+console.log("dfd : ",ls2);
+
+// function to detect a loop in side linked list
+
+function detectLoop(ls2){
+   var point1=ls2.root,point2=ls2.root;
+
+   while(point1 && point2 && point2.next){
+            point1 = point1.next;
+            point2 =point2.next.next;
+           if(point1 == point2){
+                  return true;
+           }
+   }
+   return false;
+}
+
+
+console.log(detectLoop(ls2));
+
+
+
+// implement merge sort for arrays
+var mergeArr=[4,5,7,8,9,6,5,8];
+function divide(arr){
+   for(var i=0;i<arr.length;i++){
+        merge(arr[i],arr[i+1]);
+   }
+}
+
+function merge(ar1,ar2){
+   // console.log(arr1,ar2);
+   
+                
+}
+divide(mergeArr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Mergesort = (function() {
+
+  /**
+   * Sorts the array by breaking it down
+   * into smaller chunks.
+   *
+   * @param {Array} array The array to sort
+   */
+  function sort(array) {
+
+    var length = array.length,
+        mid    = Math.floor(length * 0.5),
+        left   = array.slice(0, mid),
+        right  = array.slice(mid, length);
+
+    if(length === 1) {
+      return array;
+    }
+
+    return merge(sort(left), sort(right));
+
+  }
+
+  /**
+   * Merges two sublists back together.
+   * Shift either left or right onto
+   * the result depending on which is
+   * lower (assuming both exist), and simply
+   * pushes on a list if the other doesn't
+   * exist.
+   *
+   * @param {Array} left The left hand sublist
+   * @param {Array} right The right hand sublist
+   */
+  function merge(left, right) {
+
+    var result = [];
+
+    while(left.length || right.length) {
+
+      if(left.length && right.length) {
+
+        if(left[0] < right[0]) {
+          result.push(left.shift());
+        } else {
+          result.push(right.shift());
+        }
+
+      } else if (left.length) {
+        result.push(left.shift());
+      } else {
+        result.push(right.shift());
+      }
+
+    }
+
+    return result;
+
+  }
+
+  return {
+    sort: sort
+  };
+
+})();
+
+console.log(Mergesort.sort(mergeArr))
+
+
+// make a binary search tree from an sorted array
+
+var binaryArr=[1,4,5,6,7,8,9];
+
+var binaryTree=function(){
+             function Node(data){
+                    this.data=data;
+                    this.left=null;
+                    this.right=null;
+             }
+             function arrayTobst(arr,start,end){
+                 if(start > end ){
+                     return null;
+                 }
+                 var mid =Math.floor((start + end)/2);
+                 var node = new Node(arr[mid]);
+
+                 node.left = arrayTobst(arr,start,mid-1);
+                 node.right =arrayTobst(arr,mid+1,end);
+
+                 return node;
+             }   
+             function findNode(node,key){
+                 if(node === null){
+                        return false;
+                 }
+                 if(node.data === key){
+                        return true;
+                 }
+                 if(node.data > key){
+                     var node= node.left
+                     findNode(node,key);
+                 }
+                 if(node.data < key){
+                     var node= node.right
+                     findNode(node,key);
+                 }
+             }
+             function inorder(node){
+                 
+                   if(node === null){
+                       return;
+                   }
+                   inorder(node.left);
+                   console.log(node.data);
+                   inorder(node.right);
+             }
+             function preorder(node){
+                 if(node === null){
+                       return;
+                   }
+                   console.log(node.data);
+                   inorder(node.left);
+                   inorder(node.right);
+             }
+             function postorder(node){
+                 if(node === null){
+                       return;
+                   }
+                   postorder(node.left);
+                   postorder(node.right);
+                   console.log(node.data);
+             }
+             function mirror(node){
+                 if(node === null){
+                     return false;
+                 }else{
+                     var root =node;
+                     var nodeleft = node.left;
+                     var noderight =node.right;
+
+                     root.left=noderight;
+                     root.right=nodeleft;
+                        mirror(root.left);
+                        mirror(root.right);
+                            console.log(root);
+                 }
+             }
+             return{
+                 Node:Node,
+                 arrayTobst:arrayTobst,
+                 findNode:findNode,
+                 inorder:inorder,
+                 preorder:preorder,
+                 postorder:postorder,
+                 mirror:mirror
+             }
+};
+var btTree =new binaryTree();
+var root = btTree.arrayTobst(binaryArr,0,binaryArr.length);
+ console.log('binaryTree',btTree,root);
+console.log("getHeight",getHeight(root));
+//console.log('binaryTree inorder',btTree.inorder(root));
+
+
+//console.log('binaryTree findNode',btTree.findNode(root,7));
+
+//btTree.mirror(root);
+
+//var heightl=0,heightr=0;
+function getHeight(node){
+    if(node==null){
+            return -1;
+    }
+        return (1+ Math.max( getHeight(node.left),getHeight(node.right)));
+
+    //or below code 
+   /* var  heightl= getHeight(node.left);
+    var heightr= getHeight(node.right);
+
+    if(heightl >heightr){
+            return heightl+1
+    }
+    else{
+        return heightr+1;
+    } */
+}
+
+
+// function to implement a queue
+
+function Queue(){
+    this.head=null;
+    this.data=[];
+}
+
+Queue.prototype ={
+    constructor:constructor,
+    enque : function (value){
+        if(value != null){
+             this.data.push(value);   
+        }
+    },
+    dequeue : function (){
+            return this.data.shift();
+    }
+}
+
+
+
+
+
+
+
+// implement graphs Breadth first search
+
+
+var bfs = function (){
+    var adjancyArray=[];
+
+    var Graph = function (v){
+            this.length=v;
+            this.adjancyList =new Array(v);
+            for(var i=0;i<v;i++){
+                this.adjancyList[i]= new Linkedlist();     
+            }
+
+    }
+
+    var addEdge = function(a,b){
+            this.adjancyList[a].add(b);
+    }
+
+    var BFSTraverse = function (start){
+            var s= start;
+            var arr=[];
+            var queue = new Queue();
+            var adjList=this.adjancyList;
+            queue.enque(s);
+            arr.push(s);
+            var adj =adjList[s].root
+            while(queue.data.length){
+                s = queue.dequeue();    
+                console.log("traverse the graph :",s);
+                while(adj.next !== null){
+                    if(arr.indexOf(adj.value) == -1 ){
+                        queue.enque(adj.value);
+                        arr.push(adj.value);
+                        adj =adj.next;
+                    }
+                }
+                if(adj.next == null){
+                     if(arr.indexOf(adj.value) == -1){
+                        arr.push(adj.value);
+                        queue.enque(adj.value);
+                     }
+                }
+
+            }
+            console.log("bsf push array :",arr,queue);
+    }
+
+
+    return{
+    Graph:Graph,
+    addEdge:addEdge,
+    BFSTraverse:BFSTraverse
+    }
+}
+
+var bfs = new bfs();
+bfs.Graph(5);
+
+bfs.addEdge(0,1);
+bfs.addEdge(0,2);
+bfs.addEdge(1,2);
+bfs.addEdge(2,0);
+bfs.addEdge(2,3);
+bfs.addEdge(3,3);
+bfs.addEdge(1,4);
+bfs.addEdge(0,4);
+
+bfs.BFSTraverse(0);
+console.log("bfs",bfs);
+
+
+
+
+// chekc for balanced paranthesis of some expressions
+var exp= '((a()))';
+function validateExp(exp){
+        console.log('exp',exp);
+        if(exp == ''){
+           return true;
+        }else{
+            var temp=exp.split('');
+            var arr=[];
+            var start =['(','{','['];
+            var end =[')','}',']'];
+            var mapkey ={
+                    "(" :")",
+                    "[" : "]",
+                    "{" : "}"
+            };
+            for(var i=0;i<temp.length;i++){
+                var value=temp[i];
+                    if(start.indexOf(value) >= 0){
+                        arr.push(value);
+                    }else if(end.indexOf(value) >=0){
+                        var key =arr.pop(value)
+                            if(value !== mapkey[key]){
+                                return false;
+                            }
+
+                    }
+            }
+            if(arr.length === 0){
+                return true;
+            }else{
+                return false
+            }
+            
+        }
+}
+
+console.log("validateExp .. :",validateExp(exp));
+
+
+
+
+
+// permutation of string
+//recPerm("abcd", '');
+
+function recPerm(rest, soFar) {
+    var next;
+    var remaining;
+
+    if (rest == '') {
+        console.log(soFar);
+    } else {
+
+        for (var i = 0; i < rest.length; i++) {
+            remaining = rest.substr(0,i) + rest.substr(i+1,rest.length-1);
+            next = soFar + rest[i];
+            recPerm(remaining, next);
+        }
+
+    }   
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// merge sort injavascript
+
+function mergeSort (arr) {    
+    if (arr.length < 2) return arr;
+    console.log(.5)
+    var mid = Math.floor(arr.length /2);
+    var subLeft = mergeSort(arr.slice(0,mid));
+    var subRight = mergeSort(arr.slice(mid));
+    console.log(1,subLeft,subRight);
+    return merge(subLeft, subRight);
+}
+
+function merge (a,b) {
+  console.log(2);
+    var result = [];
+    while (a.length >0 && b.length >0)
+        result.push(a[0] < b[0]? a.shift() : b.shift());
+    return result.concat(a.length? a : b);
+}
+
+var test = [1,2,9,3,2,5,14,0];
+//console.log(mergeSort(test)); // -> [0, 1, 2, 2, 3, 5, 9, 14]
+
+
+
+
+
+
+
+// find max n mim diff
+var arrMarkit=[50,80,10,180,45,57,70,100,200,10,300,400,30];
+var arrMarkit2=[100, 180, 260, 310, 40, 535, 695];
+function findMaxProfit(arr){
+    var firstMinm =arr[0];
+    var lstMax=0;
+    for(var i=0;i<=arr.length;i++){
+            
+            if(arr[i] >arr[i+1]){
+                firstMinm=arr[i+1];
+            }
+
+            if(arr[i] > arr[i+1]){
+                lstMax=arr[i]
+            }
+             if(i+1 ==arr.length){
+                // lstMax=arr[i+1]
+            }
+            console.log("firstmin",firstMinm,"lastmax",lstMax);
+    }
+}
+
+//findMaxProfit(arrMarkit);
+
+function getPath(){
+    var arr=[[1,1,1,0],[1,0,0,0],[1,1,1,1],[1,0,0,1]];
+   
+    var N=4;
+   // console.table(arr);
+    // have to reach from 0,0 to 4,4
+    var start=arr[0][0];
+    var end=arr[3][3];
+    var dir=0;
+    var count=0;
+    solveUtil(arr,0,0,sol,N);
+    console.table(arr)
+    console.table(sol)
+    
+}
+var sol=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+function solveUtil(maze,x,y,sol,N){
+   if(x=== N-1 && y=== N-1 ){
+     sol[x][y]=1;
+     return true;
+   }
+
+   else{
+        if(x <4 && y<4  && maze[x][y] === 1 ){
+            sol[x][y]=1;
+        }
+         if(x <4 && y<4){
+          solveUtil(maze,x+1,y,sol);
+          solveUtil(maze,x,y+1,sol);
+         sol[x][y]=0;
+         }
+       
+        return false;
+   }
+}
+getPath();
