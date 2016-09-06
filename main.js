@@ -1297,40 +1297,115 @@ function findMaxProfit(arr){
 }
 
 //findMaxProfit(arrMarkit);
-
-function getPath(){
-    var arr=[[1,1,1,0],[1,0,0,0],[1,1,1,1],[1,0,0,1]];
-   
-    var N=4;
-   // console.table(arr);
-    // have to reach from 0,0 to 4,4
-    var start=arr[0][0];
-    var end=arr[3][3];
-    var dir=0;
-    var count=0;
-    solveUtil(arr,0,0,sol,N);
-    console.table(arr)
-    console.table(sol)
-    
-}
+var arrMaze=[[1,1,1,0],[1,0,0,0],[1,1,1,1],[1,0,0,1]];
 var sol=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-function solveUtil(maze,x,y,sol,N){
-   if(x=== N-1 && y=== N-1 ){
-     sol[x][y]=1;
-     return true;
+var N=4;
+function getPath(){
+    var N=4;
+    if(!solveUtil(0,0)){
+        console.log('no solution');
+    }
+    console.table(arrMaze);
+    console.table(sol);   
+}
+var count=0;
+function solveUtil(x,y){
+   // console.log("cal util",count++);
+   if(x==N-1 && y==N-1){
+       sol[x][y]=1;
+       return true;
    }
-
-   else{
-        if(x <4 && y<4  && maze[x][y] === 1 ){
-            sol[x][y]=1;
+   if(x>=0 && y>=0 && y<N && x<N && arrMaze[x][y] ===1){
+       console.log("count :",count++);
+             sol[x][y]=1;
+            if(solveUtil(x+1,y)){
+                return true;
+            }
+         if(solveUtil(x,y+1)){
+                return true;
         }
-         if(x <4 && y<4){
-          solveUtil(maze,x+1,y,sol);
-          solveUtil(maze,x,y+1,sol);
-         sol[x][y]=0;
-         }
-       
-        return false;
+        sol[x][y]=0;
+        //return false;      
    }
+   return false;
 }
 getPath();
+
+
+
+var arr20=[1,2,3,0,9];
+var solution =[0,0,0,0,0];
+function backTrack(x){
+    if(x===5){
+       solution[x]=10;
+       return true;
+    }
+    if(arr20[x] !== 0){
+            solution[x]=11;
+
+            if(backTrack(x+1)){
+                return true;
+            }
+            solution[x]=2;
+    }
+    return false;
+}
+if(!backTrack(0)){
+        console.log('no solution');
+    }
+console.log(arr20,solution);
+
+
+// longestSubStr substring algo
+
+var string1 ="12abcf123456f";
+var string2= "2abcdf12345678";
+function longestCommonSubstring(string1, string2){
+	// init max value
+	var longestCommonSubstring = 0;
+	// init 2D array with 0
+	var table = [],
+            len1 = string1.length,
+            len2 = string2.length,
+            row, col;
+	for(row = 0; row <= len1; row++){
+		table[row] = [];
+		for(col = 0; col <= len2; col++){
+			table[row][col] = 0;
+		}
+	}
+	// fill table
+        var i, j;
+	for(i = 0; i < len1; i++){
+		for(j = 0; j < len2; j++){
+			if(string1[i] === string2[j]){
+				if(table[i][j] === 0){
+					table[i+1][j+1] = 1;
+				} else {
+					table[i+1][j+1] = table[i][j] + 1;
+				}
+				if(table[i+1][j+1] > longestCommonSubstring){
+					longestCommonSubstring = table[i+1][j+1];
+				}
+			} else {
+				table[i+1][j+1] = 0;
+			}
+		}
+	}
+    console.table(table);
+	return longestCommonSubstring;
+}
+longestCommonSubstring(string1,string2);
+
+function lonsubSequence(str1,str2){
+    var l1=str1.length;
+    var l2= str.length;
+        if(str1.length === 0 || str2.length===0){
+            return 0;
+        }
+        if(str1[l1-1] === str1[l2-1]){
+
+        }
+}
+
+lonsubSequence(string1,string2);

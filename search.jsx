@@ -23,3 +23,5 @@ class SearchBar1 extends React.Component {
 }
 
 ReactDOM.render(<SearchBar1/>,document.getElementById('search'));
+
+
