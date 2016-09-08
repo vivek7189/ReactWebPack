@@ -202,7 +202,7 @@ function isPrime(number) {
    }
 
    var squareRoot = Math.sqrt(number);
-   for(var i = 3; i <= squareRoot; i += 2) {
+   for(var i = 3; i <= squareRoot; i ++) {
       if (number % i === 0) {
          return false;
       }
@@ -661,3 +661,235 @@ console.log("quicksort",arr);
 }
 var quicklength =array13.length-1;
 quickSort(array13,0,quicklength);
+
+
+
+
+var obj={
+    name:'vive',
+    print: function (){
+        console.log('get it',this.name);
+    }
+}
+var obj2={
+    name:"test"
+}
+obj.print.call(obj2);
+
+Object.prototype.callIt = function (obj){
+    console.log('comot',this,obj);
+    //this.name=obj.name;
+   // obj.name="test1";
+       return this['[[Call]]'](func, obj);
+}
+//obj.print.callIt(obj2);
+
+
+Function.prototype.apply1 = function apply (thisArg, argArray) {
+    var len = argArray.length;
+    //var n =  ToUint32(len);
+    var argList = []; // where this is a List not an array.
+    var index = 0;
+    var indexName;
+    var nextArg;
+
+    return this['[[Call]]'](thisArg, argList); // ignore the syntax however
+                                                     // This is the line where the function
+                                                     // will be called and provide 
+                                                     // the thisArg and thisArray
+}
+
+//obj.print.apply1(obj2,[1,2]);
+
+
+
+function main2(){
+     var arr90=[1,5,8,9];
+   this.fe =function fe(){
+      
+        setTimeout(function(arr) {
+            
+            console.log("tyyyy",this);
+            for(var i=0;i<arr90.length;i++){
+                console.log("gy",arr[i]);
+            }
+        }.bind(this,arr90), 1000)
+   }
+   ;
+}
+//new main2().fe();
+
+
+// maxmum possible values
+function reverse(arr,left ,right,){
+    var lndx=left-1;
+    var rndx=right-1;
+    for(var i=lndx;i<rndx;i++){
+            var temp=arr[lndx];
+            arr[lndx]=arr[rndx];
+            arr[rndx]=temp;
+            rndx--;
+            lndx++;
+    }
+    //console.log("reve",arr);
+   // return arr;
+}
+var array60=[1,2,3,4,5,6,7,8,9,10,11,12];
+//reverse([1,2,3,4,5,6],2,5);
+function arrReverse(n){
+    var left=1;
+    var right=n;
+    reverse(array60,left,right)
+        for(var i=0;i<array60.length;i++){
+            if(i%n === 0 && i>n){
+                left=i+1;
+                right=i+n;
+              reverse(array60,left,right)   
+           }
+        } 
+        console.log("reve1",array60);      
+}
+arrReverse(4);
+// check prime number
+
+function checkPrime(n){
+   if(n<2) return false;
+    var str=Math.sqrt(n);
+    for(var i=2;i<n;i++){
+        if(n%i === 0){
+            return false;
+        }
+    }
+    return true
+}
+console.log("prime number is : ",checkPrime(19));
+
+
+
+
+
+
+// make a binary saerch tree from an sorted array
+
+var binaryArr=[1,4,5,6,7,8,9,10,11,12,13,14];
+//var binaryArr=[1,2,3,4,5];
+
+var binaryTree=function(){
+             function Node(data){
+                    this.data=data;
+                    this.left=null;
+                    this.right=null;
+             }
+             function arrayTobst(arr,start,end){
+                 if(start > end ){
+                     return null;
+                 }
+                 var mid =Math.floor((start + end)/2);
+                 var node = new Node(arr[mid]);
+
+                 node.left = arrayTobst(arr,start,mid-1);
+                 node.right =arrayTobst(arr,mid+1,end);
+
+                 return node;
+             }   
+             function findNode(node,key){
+                 if(node === null){
+                        return false;
+                 }
+                 if(node.data === key){
+                        return true;
+                 }
+                 if(node.data > key){
+                     var node= node.left
+                     findNode(node,key);
+                 }
+                 if(node.data < key){
+                     var node= node.right
+                     findNode(node,key);
+                 }
+             }
+             function inorder(node){
+                 
+                   if(node === null){
+                       return;
+                   }
+                   inorder(node.left);
+                   console.log(node.data);
+                   inorder(node.right);
+             }
+             function preorder(node){
+                 if(node === null){
+                       return;
+                   }
+                   console.log(node.data);
+                   inorder(node.left);
+                   inorder(node.right);
+             }
+             function postorder(node){
+                 if(node === null){
+                       return;
+                   }
+                   postorder(node.left);
+                   postorder(node.right);
+                   console.log(node.data);
+             }
+             function mirror(node){
+                 if(node === null){
+                     return false;
+                 }else{
+                     var root =node;
+                     var nodeleft = node.left;
+                     var noderight =node.right;
+
+                     root.left=noderight;
+                     root.right=nodeleft;
+                        mirror(root.left);
+                        mirror(root.right);
+                            console.log(root);
+                 }
+             }
+             return{
+                 Node:Node,
+                 arrayTobst:arrayTobst,
+                 findNode:findNode,
+                 inorder:inorder,
+                 preorder:preorder,
+                 postorder:postorder,
+                 mirror:mirror
+             }
+};
+var btTree =new binaryTree();
+var root = btTree.arrayTobst(binaryArr,0,binaryArr.length);
+ console.log('binaryTree',btTree,root);
+
+ function finLCAbinary(node,n1,n2){
+    if(node === null){
+        return null;
+    }
+    if(node.data >n1 && node.data > n2){
+        finLCAbinary(node.left,n1,n2);
+    }
+    if(node.data < n1 && node.data < n2){
+        finLCAbinary(node.right,n1,n2);
+    }
+    return node.data;
+ }
+ console.log("finLCAbinary : ",finLCAbinary(root,6,12));
+
+
+
+// find a node path in binary tree not BST
+var BSTPathArray=[];
+function findPathBST(node,n){
+    if(node === null){
+        return false;
+    }
+    if(node.data === n || findPathBST(node.left,n) || findPathBST(node.right,n)){
+        BSTPathArray.push(node.data);
+        return true;
+    }
+
+ return false;;
+}
+console.log(findPathBST(root,11));
+console.log("BSTPathArray",BSTPathArray);
