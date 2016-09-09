@@ -117,7 +117,7 @@ for(var i=0;i<nodeAll.length;i++){
 
 */
 
-// longest common sustring
+// longest common substring
 
 var str1='abcd';
 var str2='abc';
@@ -893,3 +893,57 @@ function findPathBST(node,n){
 }
 console.log(findPathBST(root,11));
 console.log("BSTPathArray",BSTPathArray);
+
+
+// find a pattern in string
+
+function stringPattern(str,pattern){
+    var i=0;
+    var a=str;
+    for(var i=0;i<arr.length;i++){
+        if(a[i] === 'a'){
+            if(a[++i] === 'b'){
+                while(a[++i] === "c"){
+                    i++
+                }
+                while(a[++i] === "d"){
+                    i++
+                }
+                if(a[--i] === "e"){
+                     console.log('found');
+                return true;
+                }else{
+                    console.log('not found');
+                }
+               
+            }
+            else{
+                console.log("no found");
+                return false
+            }
+        }
+    }
+}
+stringPattern('abccctddde',"abc*d*");
+
+
+// find all pair where sum is some given number
+
+function findPair(a,n){
+    var obj={};
+    var i=0;
+    var j=arr.length;
+  while(i<j){
+            if(a[i]+a[j] ===n){
+                console.log("sum find at",a[i],"+",a[j],"gh",n);
+                i++;
+                j--;
+            }
+           else if(a[i]+a[j] <n){
+                i++;
+            }else if(a[i]+a[j]>n){
+                    j--;
+            }
+  } 
+}
+console.log(findPair([1,2,3,4,5,6,7,8],9));
