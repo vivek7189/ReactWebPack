@@ -611,7 +611,6 @@ function selectionSort(arr){
          if(arr[minm] > arr[j+1]){
                  minm=j+1;
          }
-        
       }
        if(arr[first] >arr[minm] ){
                    var ds=arr[minm];
@@ -878,6 +877,23 @@ var root = btTree.arrayTobst(binaryArr,0,binaryArr.length);
 
 
 
+ function finLCAbinaryTree(node,n1,n2){
+    if(node === null){
+        return null;
+    }
+    if(node.data === n1 || node.data === n2){
+        return node;
+    }
+    var nodeLeft= finLCAbinaryTree(node.left,n1,n2);
+    var nodeRight= finLCAbinaryTree(node.right,n1,n2);
+    if(nodeLeft !== null && nodeRight !== null){
+            return node;
+    }
+    //console.log('nodeLeft',nodeLeft,"nodeRight",nodeRight);
+    return (nodeLeft !== null) ? nodeLeft: nodeRight;
+   
+} 
+console.log('finLCAbinaryTree',finLCAbinaryTree(root,6,4));
 // find a node path in binary tree not BST
 var BSTPathArray=[];
 function findPathBST(node,n){
@@ -889,7 +905,7 @@ function findPathBST(node,n){
         return true;
     }
 
- return false;;
+ return false;
 }
 console.log(findPathBST(root,11));
 console.log("BSTPathArray",BSTPathArray);
@@ -914,8 +930,7 @@ function stringPattern(str,pattern){
                 return true;
                 }else{
                     console.log('not found');
-                }
-               
+                }              
             }
             else{
                 console.log("no found");
@@ -947,3 +962,31 @@ function findPair(a,n){
   } 
 }
 console.log(findPair([1,2,3,4,5,6,7,8],9));
+
+
+
+// find next larget number from given digits
+
+function nextNumber(num){
+  var arr =num.toString().split('');
+   var arrlen=arr.length;
+   for(var i=arrlen;i>0;i--){
+        if(arr[i] > arr[i-1]){
+               var temp=arr[i];
+               arr[i]=arr[i-1];
+               arr[i-1]=temp; 
+               break;
+        }
+   }
+   console.log('next number',arr.toString());
+}
+nextNumber(12345321);
+
+
+
+
+
+
+
+
+
