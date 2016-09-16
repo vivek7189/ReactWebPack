@@ -910,7 +910,36 @@ function findPathBST(node,n){
 console.log(findPathBST(root,11));
 console.log("BSTPathArray",BSTPathArray);
 
+//inorder traversal of BST without recursion and stack (morris traversal)
 
+function morrisTravesal(node){
+        if(node == null){
+            return false;
+        }
+        var current =node;
+        var pre;
+        while(current !== null){
+             if(current.left === null){
+                 console.log('morrise data',current.data);
+                 current =current.right;
+             }else{
+                 pre = current.left;
+                while (pre.right !== null && pre.right !== current) 
+                    pre = pre.right;
+                if (pre.right == null) {
+                    pre.right = current;
+                    current = current.left;
+                } 
+                 else {
+                    pre.right = null;
+                    console.log("morris data",current.data + " ");
+                    current = current.right;
+                }   /* End of if condition pre->right == NULL */
+                
+             }
+        }
+       }
+morrisTravesal(root);
 // find a pattern in string
 
 function stringPattern(str,pattern){
@@ -965,7 +994,7 @@ console.log(findPair([1,2,3,4,5,6,7,8],9));
 
 
 
-// find next larget number from given digits
+// find next largest number from given digits
 
 function nextNumber(num){
   var arr =num.toString().split('');
@@ -981,7 +1010,6 @@ function nextNumber(num){
    console.log('next number',arr.toString());
 }
 nextNumber(12345321);
-
 
 
 
