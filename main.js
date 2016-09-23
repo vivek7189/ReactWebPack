@@ -1116,7 +1116,7 @@ function animation (options){
 
 /*
 
-  function content(){
+   function content(){
     var http = new XMLHttpRequest();
     http.open('GET','http://localhost:3000/getFile',true);
     http.onreadystatechange = function (){
@@ -1130,7 +1130,7 @@ function animation (options){
 
 var idButton = document.getElementById('getIt');
 idButton.addEventListener('click',content,true);
-var dataObj={};
+
 function processData(data){
         var file= data;
         var selectorName = '(-?[_a-z]+[_\\w-]*)';
@@ -1140,23 +1140,49 @@ function processData(data){
         //selectorName: new RegExp(selectorName, 'g'),
         var classSelector =new RegExp('(\\.|\\[class[\\^\\$\\|\\*]?=)' + selectorName + selectorSuffix, 'gi');
         var matches=  file.replace(/class="(.*?)"/gi , replacer);
-        console.log("matches",matches);
+        console.log("matches",matches,'dataObj',dataObj);
 }
  var selectorName1 = '(-?[_a-z]+[_\\w-]*)';
-  var selectorName =new RegExp(selectorName1, 'g');
+  var selectorName2 =new RegExp(selectorName1, 'g');
   function replacer(attributes){
     	var attribute = attributes.split('=');
 		return attribute[0] + '=' + attribute[1]
-			.replace(selectorName, function(match,selectorName) {
-        console.log('match',match);
+			.replace(selectorName2, function(match,selectorName3) {
+        console.log('match',match,'selectorName',selectorName3);
 				switch (attribute[0]) {
 					case 'id':
 					case 'for':
 						return 'ghj'//idLibrary.get(selectorName);
 					default: //class
-						return 'komal ghghg'//classLibrary.get(selectorName);
+						return classLibrary(selectorName3);
 				}
 			});
   }
 
+var dataObj={};
+
+function classLibrary(name){
+  var miniName;
+      if(dataObj[name]){
+          miniName =dataObj[name];
+      }else{
+        var seed= Object.keys(dataObj).length;
+         dataObj[name] = makeShort(seed)
+      }
+    return miniName;  
+}
+
+function makeShort(seed){
+  
+ var library = 'abcdefghijklmnopqrstuvwxyz',
+		libraryLength = library.length,
+  	prefix = '';
+	//break the seed down if it is larger than the library
+	if (seed >= libraryLength) {
+		prefix = makeShort(Math.floor(seed / libraryLength) - 1);
+	}
+	//return the prefixed shortname
+	return prefix + library[seed % libraryLength];
+
+}
 */
