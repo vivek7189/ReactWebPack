@@ -1,3 +1,54 @@
 ul li{
     color:red;
 }
+#top{
+    max-height :150px;
+    overflow:scroll;
+    width:500px;
+}
+#innerTop{
+    width: 500px;
+    padding: 10px;
+    border: 5px solid gray;
+    overflow: scroll;
+    /* height: 500px; */
+}
+
+
+#everything {
+    position: relative;
+    width: 250px;
+    height: 300px;
+}
+#scroll-area {
+    width:250px;
+    height:300px;
+    position: relative;
+    overflow: hidden;
+}
+#scroll-area .scroll-content {
+    padding: 0px;
+    border-bottom:1px solid red; /* just for test */
+    
+}
+.scrollbar-track {
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0px;
+    width:10px;
+    background-color: none;
+}
+.scrollbar-thumb {
+    cursor:pointer;
+    position:absolute;
+    top:0;
+    left:0;
+    width:10px;
+    /*height:30px;*/
+    background-color:#88f;
+}
+p {
+    margin: 0;
+    padding: 0;
+}

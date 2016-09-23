@@ -31,6 +31,7 @@ var scrHeight = window.document.body.scrollTop;
     }
      if((docHeight <= winHeight+scrHeight) && (e.wheelDelta >0)){
         console.log('remove content');
+
        index= index-1;
         main.removeChild(main.lastElementChild);
          main.removeChild(main.lastElementChild);
@@ -1013,8 +1014,149 @@ nextNumber(12345321);
 
 
 
+function getIt(e){
+     var currentheight=e.currentTarget.scrollTop;
+     console.log(currentheight);
+ 
+   
+  var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+ console.log('delta point',delta);
+ e.currentTarget.scrollTop = 30 +currentheight;
+   if(scrollHeight <= offHeigtht+currentheight){
+      console.log('bottom');
+   }
+   
+}
+var topid= document.getElementById('top');
+var innerTop= document.getElementById('innerTop');
+var scrollHeight=topid.scrollHeight;
+var offHeigtht =topid.offsetHeight;
+topid.addEventListener('mousewheel',getIt,true);
 
 
 
 
 
+
+// custome scroll in javscript
+
+var all = document.getElementById('everything');
+var elem = document.getElementById('scroll-area');
+var    track = all.children[1];
+var    thumb = track.children[0];
+var    height = parseInt(elem.offsetHeight, 10);
+var    cntHeight = parseInt(elem.children[0].clientHeight, 10);
+var    trcHeight = parseInt(track.offsetHeight, 10);
+var    mean = 80; // For multiplier (go faster or slower);
+var    current = 0;
+
+console.log(all,elem,track,thumb,height,cntHeight,trcHeight);
+thumb.style.height = Math.round(height / cntHeight * trcHeight) + 'px'; // Set the scrollbar thumb height
+
+var doScroll = function (e) {
+
+    // cross-browser wheel delta
+    e = window.event || e;
+    var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    
+    var scrolltop = elem.scrollTop;
+    
+    // scrollTop property takes positive values when you scroll down and our delta variable behaves otherwise, so the equation will be:
+    elem.scrollTop = scrolltop - delta * mean;
+    
+    // set top position for the scrollbar thumb
+    //thumb.style.top = (elem.scrollTop / cntHeight * trcHeight) + 'px';
+
+    //e.preventDefault();
+};
+
+if (elem.addEventListener) {
+    elem.addEventListener("mousewheel", doScroll, false);
+    elem.addEventListener("DOMMouseScroll", doScroll, false);
+} else {
+    elem.attachEvent("onmousewheel", doScroll);
+}
+
+
+
+
+function User(login){
+  this.login =login;
+  this.sayHi = function (){
+      console.log(this.login);
+  }
+}
+
+var user = new User('Vivek');
+//setTimeout(user.sayHi.bind(user),3000);
+setTimeout(function (){
+    console.log(this);
+user.sayHi();
+},3000);
+
+
+
+function animation (options){
+  var start= new Date();
+ var id = setInterval(function (){
+      var timePassed = new Date()-start;
+  var progress = timePassed/options.duration;
+  if(progress >1){
+        progress=1;
+  }
+  var delta = options.delta(progress);
+  options.step(delta);
+
+  if(progress === 1){
+        clearInterval(id);
+  }
+ },options.delay || 10);
+}
+
+
+/*
+
+  function content(){
+    var http = new XMLHttpRequest();
+    http.open('GET','http://localhost:3000/getFile',true);
+    http.onreadystatechange = function (){
+        if(http.readyState ===4 && http.status === 200){
+            console.log("res is",http.responseText);
+            processData(http.responseText);
+        }
+    }
+    http.send();
+}
+
+var idButton = document.getElementById('getIt');
+idButton.addEventListener('click',content,true);
+var dataObj={};
+function processData(data){
+        var file= data;
+        var selectorName = '(-?[_a-z]+[_\\w-]*)';
+          var selectorSuffix = '((?=[\\s:#\\.\\{,\\>\\~+\\[\\]]))(?=(?:.|\n|\r)*{)';
+
+        //var selectorName = '(-?[_a-z]+[_\\w-]*)';
+        //selectorName: new RegExp(selectorName, 'g'),
+        var classSelector =new RegExp('(\\.|\\[class[\\^\\$\\|\\*]?=)' + selectorName + selectorSuffix, 'gi');
+        var matches=  file.replace(/class="(.*?)"/gi , replacer);
+        console.log("matches",matches);
+}
+ var selectorName1 = '(-?[_a-z]+[_\\w-]*)';
+  var selectorName =new RegExp(selectorName1, 'g');
+  function replacer(attributes){
+    	var attribute = attributes.split('=');
+		return attribute[0] + '=' + attribute[1]
+			.replace(selectorName, function(match,selectorName) {
+        console.log('match',match);
+				switch (attribute[0]) {
+					case 'id':
+					case 'for':
+						return 'ghj'//idLibrary.get(selectorName);
+					default: //class
+						return 'komal ghghg'//classLibrary.get(selectorName);
+				}
+			});
+  }
+
+*/
