@@ -1116,13 +1116,22 @@ function animation (options){
 
 /*
 
-   function content(){
+ 
+
+var dataContent;
+
+
+  function content(){
     var http = new XMLHttpRequest();
     http.open('GET','http://localhost:3000/getFile',true);
     http.onreadystatechange = function (){
         if(http.readyState ===4 && http.status === 200){
-            console.log("res is",http.responseText);
-            processData(http.responseText);
+           // console.log("res is",http.responseText);
+           dataContent=http.responseText;
+            processData(dataContent);
+            setTimeout(function() {
+              processCSS(dataObj);
+            }, 5000);
         }
     }
     http.send();
@@ -1134,40 +1143,40 @@ idButton.addEventListener('click',content,true);
 function processData(data){
         var file= data;
         var selectorName = '(-?[_a-z]+[_\\w-]*)';
-          var selectorSuffix = '((?=[\\s:#\\.\\{,\\>\\~+\\[\\]]))(?=(?:.|\n|\r)*{)';
-
-        //var selectorName = '(-?[_a-z]+[_\\w-]*)';
-        //selectorName: new RegExp(selectorName, 'g'),
+        var selectorName = '(-?[_a-z]+[_\\w-]*)';
+        var selectorSuffix = '((?=[\\s:#\\.\\{,\\>\\~+\\[\\]]))(?=(?:.|\n|\r)*{)';
         var classSelector =new RegExp('(\\.|\\[class[\\^\\$\\|\\*]?=)' + selectorName + selectorSuffix, 'gi');
-        var matches=  file.replace(/class="(.*?)"/gi , replacer);
-        console.log("matches",matches,'dataObj',dataObj);
+        //var matches=  data.replace(classSelector, replacer);
+        var matches=  data.replace(/\b(?:id|class)\s*=\s*("|')([^"]*)/gi , replacer);
+       // console.log('dataObj',dataObj);
 }
  var selectorName1 = '(-?[_a-z]+[_\\w-]*)';
   var selectorName2 =new RegExp(selectorName1, 'g');
   function replacer(attributes){
     	var attribute = attributes.split('=');
-		return attribute[0] + '=' + attribute[1]
+		 var gg = attribute[0] + '=' + attribute[1]
 			.replace(selectorName2, function(match,selectorName3) {
-        console.log('match',match,'selectorName',selectorName3);
-				switch (attribute[0]) {
-					case 'id':
-					case 'for':
-						return 'ghj'//idLibrary.get(selectorName);
-					default: //class
-						return classLibrary(selectorName3);
-				}
+        
+			              var tt = classLibrary(selectorName3);
+                  
+						return tt;
+				
 			});
+     // console.log('gg',gg);
+      return gg;
   }
 
-var dataObj={};
+
+window.dataObj={};
 
 function classLibrary(name){
   var miniName;
-      if(dataObj[name]){
+      if(dataObj[name] !== undefined){
           miniName =dataObj[name];
       }else{
         var seed= Object.keys(dataObj).length;
-         dataObj[name] = makeShort(seed)
+         dataObj[name] = makeShort(seed);
+         miniName =dataObj[name];
       }
     return miniName;  
 }
@@ -1185,4 +1194,42 @@ function makeShort(seed){
 	return prefix + library[seed % libraryLength];
 
 }
+
+var cssContent;
+function processCSS(){
+        var http = new XMLHttpRequest();
+    http.open('GET','http://localhost:3000/getFileCSS',true);
+    http.onreadystatechange = function (){
+        if(http.readyState ===4 && http.status === 200){
+           // console.log("res is",http.responseText);
+           cssContent=http.responseText;
+            processCSSdata(cssContent);
+            
+        }
+    }
+    http.send();
+}
+
+
+function processCSSdata(data){
+          var file= data;
+        var selectorName = '(-?[_a-z]+[_\\w-]*)';
+        var selectorName = '(-?[_a-z]+[_\\w-]*)';
+        var selectorSuffix = '((?=[\\s:#\\.\\{,\\>\\~+\\[\\]]))(?=(?:.|\n|\r)*{)';
+        var classSelector =new RegExp('(\\.|\\[class[\\^\\$\\|\\*]?=)' + selectorName + selectorSuffix, 'gi');
+        var matches=  data.replace(classSelector, replacer1);
+        function replacer1(match,attr){
+         // console.log(match);
+          var matchstr = match.slice(1);
+          if(dataObj[matchstr]){
+               return dataObj[matchstr]
+          }else{
+           return classLibrary(matchstr);
+          }
+//return 
+        }
+        //var matches=  data.replace(/\b(?:id|class)\s*=\s*("|')([^"]*)/gi , replacer);
+        console.log("dataContenta css",matches);
+}
+
 */
